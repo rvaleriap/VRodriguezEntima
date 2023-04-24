@@ -1,0 +1,55 @@
+﻿@model  Proyecto_ENT.Exa_CatalogoProducto
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Catalogo de Productos</h2>
+
+<div class="container">
+   
+    <hr />
+    <div class="row">
+        <div style="float:right">
+
+            @Html.ActionLink("Nuevo", "Form", "Exa_CatalogoProducto", htmlAttributes: new { @class = "btn btn-success" })
+        </div>
+    </div>
+    <div class="row">
+        @if (Model.Exa_CatalogoProductos != null)
+        {
+            //tabla
+            <table class="table table.borderes table.responsive">
+                <thead>
+                    <tr>
+                        <td class="text-center" style=" font-weight:bold;">Editar</td>
+                        <td class="text-center" style=" font-weight:bold;">Descripcion</td>
+                        <td class="text-center" style=" font-weight:bold;"> Fecha Creacion</td>
+                        <td class="text-center" style=" font-weight:bold;">Eliminar</td>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Proyecto_ENT.Exa_CatalogoProducto exa_CatalogoProducto in Model.Exa_CatalogoProductos)
+                    {
+                        <tr>
+                            <td class="text-center"><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Form", "Exa_CatalogoProducto", new { IdProducto = exa_CatalogoProducto.IdProducto})"></a></td>
+                            <td class="hidden">@exa_CatalogoProducto.IdProducto</td>
+                            <td>@exa_CatalogoProducto.Descripcion</td>
+                            <td class="hidden">@exa_CatalogoProducto.IdUsuario</td>
+                            <td>@exa_CatalogoProducto.FechaCreacion</td>
+                            <td class="text-center"><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Exa_CatalogoProducto", new { IdProducto = exa_CatalogoProducto.IdProducto})" onclick="return confirm('¿Desea eliminar el producto?');"></a></td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="alert alert-danger" role="alert">Ocurrio un error al realizar la consulta </div>
+        }
+    </div>
+</div>
+
+

@@ -1,0 +1,47 @@
+﻿@model  Proyecto_ENT.Exa_CatalogoProducto
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AGREGAR PRODUCTO</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("Form", "Exa_CatalogoProducto", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="form-horizontal">
+                <div class=" form-group">
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.IdProducto, new { @class = "hidden" })
+                        @Html.TextBoxFor(model => model.IdProducto, new { @class = "hidden form-control" })
+                        @Html.ValidationMessageFor(model => model.IdProducto)
+                        @*hidden*@
+                    </div>
+                </div>
+                <div class="row">
+                    <div class=" form-group">
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.Descripcion)
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><i class="fa-solid fa-circle-user"></i></span>
+                                @Html.TextBoxFor(model => model.Descripcion, new { @class = "form-control", @id = "txtDescripcion" })
+
+                                @Html.ValidationMessageFor(model => model.Descripcion)
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <input type="submit" value="Guardar" class="btn btn-success" />
+                        @Html.ActionLink("Regresar", "GetAll", "Exa_CatalogoProducto", htmlAttributes: new { @class = "btn btn-danger" })
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
